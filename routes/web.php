@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\Listing;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,16 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render("home");
+});
+
+Route::get('/listings', function () {
+    return Inertia::render("listings", [
+        'listings' => Listing::all()
+    ]);
+});
+
+Route::get('/listing/{id}', function ($id) {
+    return Inertia::render("listing", [
+        'listing' => Listing::find($id)
+    ]);
 });
