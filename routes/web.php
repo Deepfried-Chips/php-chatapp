@@ -30,3 +30,11 @@ Route::get('/listing/{id}', function ($id) {
         'listing' => Listing::find($id)
     ]);
 });
+
+Route::get('/listing', function () {
+    return redirect('/listings');
+});
+
+Route::get('/login', function () {
+    return Inertia::render("login");
+});
