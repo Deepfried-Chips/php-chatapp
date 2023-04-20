@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
     import { Link } from '@inertiajs/svelte';
 
     export let listings;
@@ -11,8 +11,8 @@
 <ul>
 {#each listings as listing}
     <li>
-        <h1><Link href="/listing/{listing.id}">{listing.title}</Link></h1>
-        <p>{listing.description}</p>
+        <h1 class="text-3xl font-bold text-cyan-500 underline"><Link href="/listing/{listing.id}">{listing.title}</Link></h1>
+        <p class="text-xl">{listing.description}</p>
     </li>
 {/each}
 </ul>
