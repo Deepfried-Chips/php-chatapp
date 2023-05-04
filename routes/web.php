@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\UserController;
 use App\Models\Listing;
 
 /*
@@ -35,6 +36,12 @@ Route::get('/listing', function () {
     return redirect('/listings');
 });
 
-Route::get('/login', function () {
-    return Inertia::render("login");
-});
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
+
+Route::get('/register', [UserController::class, 'create'])->middleware('guest');
+
+Route::post('/users', [UserController::class, 'store']);
+
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
+
+Route::post('/users/authenticate', [UserController::class, 'authenticate']);
