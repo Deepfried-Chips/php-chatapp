@@ -1,7 +1,6 @@
 <script>
-    import { router } from '@inertiajs/svelte';
+    import { router, page } from '@inertiajs/svelte';
 
-    export let csrf_token;
     export let errors = {};
 
     let values = {
@@ -9,7 +8,7 @@
         email: null,
         password: null,
         password_confirmation: null,
-        _token: csrf_token,
+        _token: $page.props.csrf_token,
     }
 
     function handleSubmit() {

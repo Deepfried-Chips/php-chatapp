@@ -11,9 +11,7 @@ class UserController extends Controller
 {
     public function create()
     {
-        return Inertia::render('user/register', [
-            'csrf_token' => csrf_token()
-        ]);
+        return Inertia::render('user/register');
     }
 
     public function login()
@@ -33,6 +31,10 @@ class UserController extends Controller
         ]);
 
         $formFields['password'] = bcrypt($formFields['password']);
+
+        $email = trim(strtolower($formFields['email']));
+
+        $formFields['avatar'] = 'https://gravatar.com/avatar/' . md5($email) . '?d=' . asset('/images/chipsblankie.png');
 
         $user = User::create($formFields);
 
@@ -65,5 +67,22 @@ class UserController extends Controller
         }
 
         return back()->withErrors(['email' => 'Invalid credentials'])->onlyInput('email');
+    }
+
+    public function modify(Request $request)
+    {
+        $formFields = $request->validate([
+            'name' => ['required', 'min:3', 'max:32', ],
+            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore(auth()->user()->id)],
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        $formFields['password'] = bcrypt($formFields['password']);
+
+        $user = User::find(auth()->user()->id);
+
+        $user->update($formFields);
+
+        return redirect('/')->with('message','Updated');
     }
 }
