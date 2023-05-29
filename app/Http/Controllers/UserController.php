@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
@@ -85,6 +86,8 @@ class UserController extends Controller
         $formFields['avatar'] = $path;
 
         $user = User::find(auth()->user()->id);
+
+        Storage::delete($user->avatar);
 
         $user->update($formFields);
 
