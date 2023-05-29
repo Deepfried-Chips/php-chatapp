@@ -44,4 +44,8 @@ Route::post('/users', [UserController::class, 'store']);
 
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 
+Route::get('/users/me', [UserController::class, 'me'])->middleware('auth');
+
+Route::post('/users/modify', [UserController::class, 'modify'])->middleware('auth');
+
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);

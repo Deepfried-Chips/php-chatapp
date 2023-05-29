@@ -19,6 +19,11 @@ class UserController extends Controller
         return Inertia::render('user/login');
     }
 
+    public function me()
+    {
+        return Inertia::render('user/me');
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -72,12 +77,12 @@ class UserController extends Controller
     public function modify(Request $request)
     {
         $formFields = $request->validate([
-            'name' => ['required', 'min:3', 'max:32', ],
-            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore(auth()->user()->id)],
-            'password' => 'required|confirmed|min:6',
+            'name' => ['min:3', 'max:32', ],
         ]);
 
-        $formFields['password'] = bcrypt($formFields['password']);
+        $path = $request->file('avatar')->store('avatars');
+
+        $formFields['avatar'] = $path;
 
         $user = User::find(auth()->user()->id);
 

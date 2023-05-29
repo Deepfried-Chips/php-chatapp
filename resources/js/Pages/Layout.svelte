@@ -20,13 +20,13 @@
           <img class="h-10 w-10 rounded-full" src={$page.props.auth.user.avatar} alt="profile avatar"/>
         </li>
         <li>
-          <span class="font-bold">
+          <span class="font-bold text-center">
             {$page.props.auth.user.name}
           </span>
         </li>
         <li>
           <form on:submit|preventDefault={submitLogout}>
-            <button type="submit">
+            <button type="submit" class="hover:underline">
               Logout
             </button>
           </form>
