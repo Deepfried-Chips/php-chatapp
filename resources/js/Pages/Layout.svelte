@@ -16,7 +16,7 @@
       <ul class="flex space-x-6 mr-6 text-lg">
         {#if $page.props.auth.user}
         <li>
-          <img class="h-10 w-10 rounded-full" src={"/" + $page.props.auth.user.avatar} alt="profile avatar"/>
+          <a href="/users/me"><img class="h-10 w-10 rounded-full" src={"/" + $page.props.auth.user.avatar} alt="profile avatar"/></a>
         </li>
         <li>
           <span class="font-bold text-center">

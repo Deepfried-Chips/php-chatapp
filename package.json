@@ -20,6 +20,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "@inertiajs/svelte": "^1.0.2"
+        "@inertiajs/svelte": "^1.0.2",
+        "cropperjs": "^1.5.13"
     }
 }

@@ -1,5 +1,12 @@
 <script>
     import { page, useForm } from '@inertiajs/svelte'
+    import Cropper from 'cropperjs'
+    import Editor from '../components/Editor.svelte'
+    import { onMount } from 'svelte';
+
+    const URL = window.URL || window.webkitURL
+
+    let avatar
 
     export let errors = {}
 
@@ -28,7 +35,11 @@
 
     <div class="mb-6">
         <label for="avatar" class="inline-block text-lg mb-2"> Avatar </label>
-        <input type="file" class="border border-gray-200 rounded p-2 w-full" accept="image/png, image/jpeg" name="avatar" on:input={e => $form.avatar = e.target.files[0]}/>
+        <input type="file" class="border border-gray-200 rounded p-2 w-full" accept="image/*" name="avatar" on:input={e => $form.avatar = e.target.files[0]}/>
+
+        {#if $form.avatar}
+            <img src={URL.createObjectURL($form.avatar)} bind:this={avatar} alt="avatar" class="w-32 h-32 rounded-full mt-2"/>
+        {/if}
 
         {#if errors.avatar}<p class="text-red-500 text-xs mt-1">{errors.avatar}</p>{/if}
     </div>
