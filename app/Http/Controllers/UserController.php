@@ -83,7 +83,7 @@ class UserController extends Controller
 
         $path = $request->file('avatar')->store('avatars');
 
-        $formFields['avatar'] = $path;
+        $formFields['avatar'] = '/' . $path;
 
         $user = User::find(auth()->user()->id);
 
